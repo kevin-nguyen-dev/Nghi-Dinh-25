@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUSO Connect - Nghị định 25/2014/NĐ-CP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        /*@font-face {
+            font-family: 'BahnarDisplay';
+            src: url('https://static-eu.webapp-portal.com/resources/freeqrd/lp/745130/6.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'BahnarDisplay';
+            src: url('https://static-eu.webapp-portal.com/resources/freeqrd/lp/745130/7.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'BahnarText';
+            src: url('https://static-eu.webapp-portal.com/resources/freeqrd/lp/745130/8.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+        body.lang-ba, body.lang-ba input, body.lang-ba button, body.lang-ba h3, body.lang-ba p {
+            font-family: 'BahnarText', 'Inter', sans-serif !important;
+        }
+        body.lang-ba h1, body.lang-ba h2 {
+            font-family: 'BahnarDisplay', 'Inter', sans-serif !important;
+        }*/
+        
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-blue: #0066ff;
+            --neon-purple: #bc13fe;
+            --neon-gold: #ffd700;
+            --bg-dark: #050b14;
+            --glass-bg: rgba(10, 20, 40, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(0, 243, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Particle Background & Matrix Effect */
+        #particles-js {
+            position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        .font-mono-tech { font-family: 'Rajdhani', monospace; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+        /* Advanced Glassmorphism */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Structure Card Hover Effect */
+        .structure-card {
+            position: relative; overflow: hidden;
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+        }
+        .structure-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.3);
+        }
+        .structure-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 243, 255, 0.03), transparent);
+            transform: translateX(-100%); transition: 0.6s;
+        }
+        .structure-card:hover::before { transform: translateX(100%); }
+
+        /* Neon Glow Text */
+        .text-glow { text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3); }
+        .text-glow-gold { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+
+        /* Animations */
+        @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+        
+        .animate-scan-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan);
+            animation: scan 3s linear infinite;
+            opacity: 0.5;
+        }
+        @keyframes scan { 0% { top: 0%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+        /* ID Card Styles */
+        #checkin-area {
+            position: relative; width: 340px; height: 214px; /* ID card ratio */
+            margin: 0 auto; background: #0f172a; overflow: hidden; border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .id-chip {
+            width: 40px; height: 30px; background: linear-gradient(135deg, #ffd700, #b8860b);
+            border-radius: 4px; position: absolute; top: 80px; left: 20px; z-index: 10;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        /* Modal Transitions */
+        .modal-wrapper { opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .modal-wrapper.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.95); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .modal-wrapper.active .modal-content { transform: scale(1); }
+
+        /* Custom List */
+        .cyber-list li {
+            position: relative; padding-left: 20px; margin-bottom: 8px;
+        }
+        .cyber-list li::before {
+            content: '>'; color: var(--neon-cyan); position: absolute; left: 0; font-family: monospace;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body class="antialiased selection:bg-cyan-500 selection:text-black">
+
+    <div id="particles-js"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/5 px-6 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="relative w-10 h-10 flex items-center justify-center bg-cyan-900/20 rounded border border-cyan-500/30 group-hover:border-cyan-400 transition">
+                    <i class="fa-solid fa-shield-halved text-cyan-400 text-xl group-hover:animate-pulse"></i>
+                </div>
+                <div class="leading-none">
+                    <h1 class="font-tech text-lg text-white tracking-widest group-hover:text-cyan-300 transition">PUSO<span class="text-cyan-500">SECURE</span></h1>
+                    <span class="text-[9px] text-gray-500 font-mono-tech tracking-[0.2em]">NGHỊ ĐỊNH 25 CP</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex gap-8 text-xs font-mono-tech font-bold text-gray-400 tracking-wider">
+                <a href="#overview" class="hover:text-cyan-400 transition relative group">
+                    <span id="nav-overview">TỔNG QUAN</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#structure" class="hover:text-cyan-400 transition relative group">
+                    <span id="nav-structure">CẤU TRÚC</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#compliance" class="hover:text-cyan-400 transition relative group">
+                    <span id="nav-compliance">TRA CỨU</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#checkin" class="hover:text-cyan-400 transition relative group">
+                    <span id="nav-checkin">CAM KẾT</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#minigame" class="text-yellow-500 hover:text-yellow-300 transition animate-pulse">
+                    <i class="fa-solid fa-gamepad mr-1"></i> <span id="nav-minigame">GAME</span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 transition group">
+                    <img id="lang-flag" src="https://flagcdn.com/w40/vn.png" class="w-4 h-auto opacity-80 group-hover:opacity-100">
+                    <span id="lang-code" class="text-[10px] font-bold text-gray-300 group-hover:text-white">VN</span>
+                </button>
+                <button onclick="openDocViewer()" class="hidden sm:flex bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 text-cyan-400 px-4 py-1.5 rounded text-[10px] font-bold hover:shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:border-cyan-400 transition items-center gap-2">
+                    <i class="fa-solid fa-database"></i> <span id="btn-db">DỮ LIỆU NĐ25</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 relative overflow-hidden">
+        <div class="absolute top-1/4 left-10 w-24 h-24 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 border border-cyan-500/30 bg-cyan-900/10 px-4 py-1.5 rounded-full text-cyan-400 text-[10px] font-mono-tech mb-8 animate-float-slow backdrop-blur-md">
+                <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping"></span>
+                <span id="hero-badge">CHÍNH PHỦ VIỆT NAM // SỐ 25/2014/NĐ-CP</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-tech font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-cyan-500 filter drop-shadow-[0_0_25px_rgba(0,243,255,0.2)] leading-tight" id="hero-title">
+                NGHỊ ĐỊNH 25/2014
+            </h1>
+            
+            <h2 class="text-xl md:text-2xl font-mono-tech text-gray-300 mb-8 max-w-3xl mx-auto tracking-wide">
+                <span id="hero-sub">QUY ĐỊNH VỀ PHÒNG, CHỐNG TỘI PHẠM VÀ VI PHẠM PHÁP LUẬT KHÁC CÓ SỬ DỤNG CÔNG NGHỆ CAO</span>
+            </h2>
+
+            <div class="max-w-4xl mx-auto mb-10 relative group perspective-1000">
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+                <div class="relative bg-black rounded-xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                    <div class="bg-slate-900/90 backdrop-blur border-b border-white/5 p-2 flex justify-between items-center text-[10px] font-mono-tech px-4 text-gray-400">
+                        <span class="flex items-center gap-2"><div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div> <span id="video-label" class="text-cyan-400">LIVE FEED: HIGH_TECH_CRIME_PREVENTION.MP4</span></span>
+                        <span>REC [00:25:14]</span>
+                    </div>
+                    <div class="relative pt-[56.25%]">
+                        <iframe id="main-video" src="https://drive.google.com/file/d/1qz5S5ZPoJXY1sb4231lzdghTJH1y6zwA/preview" class="absolute top-0 left-0 w-full h-full border-none" allow="autoplay"></iframe>
+                        <div class="animate-scan-line pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="openInfoGraphic()" class="group px-6 py-3 bg-slate-800/80 border border-white/10 text-white rounded-lg hover:border-cyan-400 hover:bg-cyan-900/20 transition flex items-center gap-3 text-sm font-bold backdrop-blur-md">
+                    <i class="fa-solid fa-layer-group text-cyan-400 group-hover:rotate-12 transition"></i> 
+                    <span id="btn-infographic">XEM INFOGRAPHIC</span>
+                </button>
+                <a href="#structure" class="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-book-open"></i> <span id="btn-explore">KHÁM PHÁ NỘI DUNG</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 space-y-32 pb-20 relative z-10">
+
+        <section id="overview">
+            <div class="flex items-end gap-4 mb-10 border-b border-white/5 pb-4">
+                <h2 class="text-3xl md:text-4xl font-tech text-white" id="sect-overview-title">01 // TỔNG QUAN</h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent mb-2"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card p-8 rounded-2xl relative group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 text-4xl text-cyan-500/10 group-hover:text-cyan-500/30 transition"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3 class="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2"><i class="fa-solid fa-crosshairs text-sm"></i> <span id="card-scope-title">Phạm Vi Điều Chỉnh</span></h3>
+                    <p class="text-sm text-gray-400 leading-relaxed text-justify" id="card-scope-text">
+                        Nghị định quy định về hoạt động phòng ngừa, phát hiện, xử lý tội phạm và vi phạm pháp luật khác có sử dụng công nghệ cao; trách nhiệm của cơ quan, tổ chức, cá nhân.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl relative group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 text-4xl text-purple-500/10 group-hover:text-purple-500/30 transition"><i class="fa-solid fa-users-viewfinder"></i></div>
+                    <h3 class="text-lg font-bold text-purple-400 mb-4 flex items-center gap-2"><i class="fa-solid fa-fingerprint text-sm"></i> <span id="card-target-title">Đối Tượng Áp Dụng</span></h3>
+                    <ul class="text-sm text-gray-400 space-y-2 cyber-list" id="card-target-list">
+                        <li>Cơ quan chuyên trách phòng chống tội phạm.</li>
+                        <li>Cơ quan, tổ chức, công dân Việt Nam.</li>
+                        <li>Cá nhân, tổ chức nước ngoài tại VN.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl relative group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 text-4xl text-yellow-500/10 group-hover:text-yellow-500/30 transition"><i class="fa-solid fa-shield-cat"></i></div>
+                    <h3 class="text-lg font-bold text-yellow-400 mb-4 flex items-center gap-2"><i class="fa-solid fa-star text-sm"></i> <span id="card-principle-title">Nguyên Tắc Chính</span></h3>
+                    <div class="text-sm text-gray-400 space-y-3" id="card-principle-text">
+                        Lấy <strong>phòng ngừa là chính</strong>; chủ động, kịp thời phát hiện, ngăn chặn và xử lý nghiêm minh mọi hành vi vi phạm.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="structure">
+            <div class="flex items-end gap-4 mb-10 border-b border-white/5 pb-4">
+                <h2 class="text-3xl md:text-4xl font-tech text-white" id="sect-structure-title">02 // CẤU TRÚC NGHỊ ĐỊNH</h2>
+            </div>
+            
+            <p class="text-gray-500 text-xs mb-6 font-mono-tech tracking-wider uppercase"><i class="fa-solid fa-arrow-pointer text-cyan-500 mr-2"></i> <span id="hint-click">Click vào từng chương để xem chi tiết</span></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="structure-grid">
+                </div>
+        </section>
+
+        <section id="compliance">
+            <div class="flex items-end gap-4 mb-10 border-b border-white/5 pb-4">
+                <h2 class="text-3xl md:text-4xl font-tech text-white" id="sect-compliance-title">03 // BIỆN PHÁP & TRÁCH NHIỆM</h2>
+            </div>
+
+            <div class="glass-card rounded-xl overflow-hidden min-h-[500px] flex flex-col md:flex-row border border-cyan-500/20">
+                <div class="w-full md:w-1/4 bg-slate-900/80 border-r border-white/5 p-4 flex flex-col gap-4">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+                        <input type="text" id="act-search" placeholder="Tìm kiếm từ khóa..." onkeyup="filterActs()"
+                            class="w-full bg-slate-950 border border-gray-700 rounded-md py-2 pl-9 text-xs text-white focus:border-cyan-500 focus:outline-none placeholder-gray-600 transition">
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <button onclick="switchTab('measures')" id="tab-measures" class="w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between transition border border-transparent hover:bg-white/5 active-tab-style">
+                            <span><i class="fa-solid fa-shield-virus mr-2 text-cyan-500"></i> <span id="label-measures">BIỆN PHÁP PHÒNG NGỪA</span></span>
+                            <span class="bg-cyan-500/10 text-cyan-500 px-1.5 py-0.5 rounded text-[9px]" id="count-measures">0</span>
+                        </button>
+                        <button onclick="switchTab('responsibilities')" id="tab-responsibilities" class="w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between text-gray-500 transition border border-transparent hover:bg-white/5">
+                            <span><i class="fa-solid fa-user-shield mr-2 text-purple-500"></i> <span id="label-responsibilities">TRÁCH NHIỆM CHỦ THỂ</span></span>
+                            <span class="bg-purple-500/10 text-purple-500 px-1.5 py-0.5 rounded text-[9px]" id="count-responsibilities">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-auto p-4 bg-gradient-to-br from-cyan-900/20 to-transparent rounded border border-white/5">
+                        <div class="text-[10px] text-gray-400 mb-1 uppercase tracking-widest">Ghi chú</div>
+                        <p class="text-[11px] text-gray-500 italic">Dữ liệu trích xuất từ văn bản gốc Nghị định 25/2014/NĐ-CP.</p>
+                    </div>
+                </div>
+
+                <div class="flex-1 bg-slate-900/40 p-6 relative overflow-y-auto max-h-[600px] custom-scrollbar" id="acts-container">
+                    <div id="list-content" class="grid gap-3">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="checkin">
+            <div class="flex items-end gap-4 mb-10 border-b border-white/5 pb-4">
+                <h2 class="text-3xl md:text-4xl font-tech text-white" id="sect-checkin-title">04 // CAM KẾT CÔNG DÂN SỐ</h2>
+            </div>
+
+            <div class="glass-card p-10 rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/90 to-slate-800/90">
+                <div class="flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <div class="perspective-1000">
+                        <div id="checkin-area" class="group transition-transform duration-500 hover:rotate-y-12 hover:rotate-x-12">
+                            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                            
+                            <div class="relative z-10 h-full flex flex-row p-4 gap-4">
+                                <div class="w-24 flex flex-col gap-2">
+                                    <div class="w-24 h-24 bg-slate-800 rounded border border-cyan-500/50 overflow-hidden relative">
+                                        <img id="user-photo" src="https://ui-avatars.com/api/?name=Cong+Dan&background=0f172a&color=38bdf8&size=200" class="w-full h-full object-cover">
+                                        <div class="absolute inset-0 bg-cyan-500/10 mix-blend-overlay"></div>
+                                    </div>
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg/230px-Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg.png" class="w-8 h-auto opacity-80 mt-auto">
+                                </div>
+                                
+                                <div class="flex-1 flex flex-col">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <div class="text-[8px] text-gray-400 font-mono-tech tracking-widest uppercase">Thẻ xác nhận</div>
+                                            <div class="text-sm font-bold text-white font-tech tracking-wide uppercase text-glow">TUÂN THỦ NĐ25/CP</div>
+                                        </div>
+                                        <i class="fa-solid fa-fingerprint text-2xl text-cyan-500/50"></i>
+                                    </div>
+                                    
+                                    <div class="space-y-1 mt-1">
+                                        <div class="text-[9px] text-gray-300"><span class="text-cyan-600 font-bold">ID:</span> <span class="font-mono-tech tracking-widest text-cyan-300">VN-CYBER-SECURE-2014</span></div>
+                                        <div class="text-[9px] text-gray-300"><span class="text-cyan-600 font-bold">ROLE:</span> DIGITAL CITIZEN</div>
+                                        <div class="text-[9px] text-gray-300"><span class="text-cyan-600 font-bold">STATUS:</span> <span class="text-green-400">VERIFIED</span></div>
+                                    </div>
+
+                                    <div class="mt-auto pt-2 border-t border-white/10 flex justify-between items-end">
+                                        <div class="text-[7px] text-gray-500 max-w-[120px]">Cam kết thực hiện quy định pháp luật về an ninh mạng.</div>
+                                        <div class="w-8 h-8 bg-white p-0.5 rounded-sm"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ToiCamKetTuanThuND25" class="w-full h-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 max-w-sm space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2" id="checkin-instruct-title">Tạo Thẻ Cam Kết</h3>
+                            <p class="text-gray-400 text-sm" id="checkin-instruct-text">Tải ảnh cá nhân để tạo thẻ xác nhận bạn đã tìm hiểu và cam kết tuân thủ Nghị định 25/2014/NĐ-CP.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="document.getElementById('upload-input').click()" class="col-span-2 py-3 border border-dashed border-gray-600 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition bg-slate-900/50 flex flex-col items-center justify-center gap-1 group">
+                                <i class="fa-solid fa-cloud-arrow-up text-xl group-hover:scale-110 transition"></i>
+                                <span class="text-xs font-bold" id="btn-upload">TẢI ẢNH (JPG/PNG)</span>
+                            </button>
+                            <input type="file" id="upload-input" accept="image/*" class="hidden">
+                            
+                            <button onclick="downloadCheckin()" class="col-span-2 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-download"></i> <span id="btn-download">LƯU THẺ VỀ MÁY</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="minigame">
+            <div class="flex items-end gap-4 mb-10 border-b border-white/5 pb-4">
+                <h2 class="text-3xl md:text-4xl font-tech text-white" id="sect-game-title">05 // THỬ THÁCH NGHỊ ĐỊNH</h2>
+            </div>
+
+            <div class="glass-card rounded-2xl p-1 relative overflow-hidden min-h-[450px] bg-slate-900">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/5 via-transparent to-transparent"></div>
+                
+                <div class="p-8 h-full relative z-10">
+                    <div id="game-start" class="text-center h-full flex flex-col justify-center items-center gap-8 py-10">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-yellow-500 blur-2xl opacity-20 animate-pulse"></div>
+                            <i class="fa-solid fa-brain text-6xl text-yellow-400 relative z-10"></i>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2 tracking-wide" id="game-intro-title">KIỂM TRA KIẾN THỨC</h3>
+                            <p class="text-gray-400 text-sm max-w-md mx-auto" id="game-intro-text">5 câu hỏi trắc nghiệm nhanh về nội dung cốt lõi của Nghị định 25/2014/NĐ-CP.</p>
+                        </div>
+
+                        <div class="flex gap-4 text-xs font-mono-tech">
+                            <div class="bg-slate-800 px-4 py-2 rounded border border-white/10">
+                                <span class="text-gray-500 block">THỜI GIAN</span>
+                                <span class="text-white font-bold">KHÔNG GH</span>
+                            </div>
+                            <div class="bg-slate-800 px-4 py-2 rounded border border-white/10">
+                                <span class="text-gray-500 block" id="game-best-score">ĐIỂM CAO NHẤT</span>
+                                <span class="text-yellow-400 font-bold" id="high-score-display">0/100</span>
+                            </div>
+                        </div>
+
+                        <button onclick="startGame()" class="px-10 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold font-tech rounded-full shadow-[0_0_20px_rgba(234,179,8,0.4)] transition hover:scale-105" id="btn-start-game">
+                            BẮT ĐẦU
+                        </button>
+                    </div>
+
+                    <div id="game-play" class="hidden h-full flex flex-col">
+                        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                            <div class="text-xs font-mono-tech text-cyan-500"><i class="fa-solid fa-circle-question mr-1"></i> <span id="lbl-question">CÂU HỎI</span> <span id="q-current" class="text-white text-lg font-bold">1</span><span class="text-gray-600">/5</span></div>
+                            <div class="text-xs font-mono-tech text-yellow-500"><i class="fa-solid fa-star mr-1"></i> <span id="lbl-score">ĐIỂM</span>: <span id="current-score" class="text-white text-lg font-bold">0</span></div>
+                        </div>
+                        
+                        <div class="flex-1 flex flex-col justify-center">
+                            <h4 id="question-text" class="text-xl md:text-2xl text-white font-medium leading-relaxed text-center mb-10 min-h-[80px]">Loading...</h4>
+
+                            <div id="options-container" class="grid grid-cols-1 gap-3 max-w-2xl mx-auto w-full">
+                                </div>
+                        </div>
+                    </div>
+
+                    <div id="game-result" class="hidden h-full flex flex-col justify-center items-center gap-6 text-center animate-[fadeIn_0.5s]">
+                        <div class="w-24 h-24 rounded-full border-4 border-yellow-500 flex items-center justify-center bg-yellow-500/10 mb-4">
+                            <i id="result-icon" class="fa-solid fa-medal text-4xl text-yellow-500"></i>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-4xl font-tech text-white mb-2" id="game-finish-title">HOÀN THÀNH</h3>
+                            <div class="text-6xl font-mono-tech font-bold text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 my-2">
+                                <span id="final-score">0</span><span class="text-2xl text-gray-500">/100</span>
+                            </div>
+                            <p id="result-message" class="text-cyan-400 text-sm font-bold tracking-wider">XUẤT SẮC!</p>
+                        </div>
+
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="resetGame()" class="px-6 py-2 border border-gray-600 text-gray-300 rounded hover:border-cyan-400 hover:text-cyan-400 transition text-sm" id="btn-replay">
+                                Làm lại
+                            </button>
+                            <button onclick="shareResult()" class="px-6 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-500 transition text-sm" id="btn-share">
+                                Chia sẻ kết quả
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#020617] border-t border-cyan-900/30 pt-16 pb-8 relative">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-tech text-white font-bold mb-2 tracking-widest">PUSO<span class="text-cyan-500">SYSTEM</span></h2>
+                        <p class="text-gray-500 text-xs italic font-mono-tech pl-4 border-l-2 border-cyan-500" id="footer-slogan">"Lan tỏa tri thức - Kết nối tương lai"</p>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed" id="footer-sub">
+                        Cổng thông tin tra cứu và tuyên truyền Nghị định 25/2014/NĐ-CP về phòng chống tội phạm công nghệ cao.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-9 h-9 rounded bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded bg-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-white/5 p-6 rounded-xl">
+                     <div class="text-[9px] text-yellow-500 font-mono-tech tracking-widest mb-3 uppercase flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></span>
+                        <span id="footer-topic-label">Đề tài nghiên cứu</span>
+                    </div>
+                    <h3 class="text-gray-200 text-xs font-bold leading-relaxed uppercase font-tech" id="footer-topic-content">
+                        XÂY DỰNG BỘ ẤN PHẨM ĐA NGÔN NGỮ TUYÊN TRUYỀN, GIÁO DỤC PHÁP LUẬT VỀ AN NINH MẠNG VÀ PHÒNG CHỐNG TỘI PHẠM CÔNG NGHỆ CAO CHO THANH THIẾU NIÊN
+                    </h3>
+                </div>
+            </div>
+
+            
+            
+            <div class="text-center mt-10 text-[9px] text-gray-600 font-mono-tech">
+                © 2025 PUSO-LVKONTUM SYSTEM. VERSION 2.0.
+            </div>
+        </div>
+    </footer>
+
+    <div id="doc-viewer-modal" class="modal-wrapper fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeDocViewer()"></div>
+        <div class="relative w-full h-full md:w-[90%] md:h-[90%] bg-[#0a0f1c] border border-cyan-500/30 rounded-lg shadow-2xl flex flex-col overflow-hidden modal-content">
+            <div class="bg-slate-900 border-b border-cyan-900/50 p-3 flex justify-between items-center text-cyan-400">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-file-pdf animate-pulse"></i>
+                    <span class="font-mono-tech tracking-widest text-xs">VIEWER: <span class="text-white" id="modal-title">DECREE_25_FULL.PDF</span></span>
+                </div>
+                <button onclick="closeDocViewer()" class="w-8 h-8 flex items-center justify-center hover:bg-red-500/20 hover:text-red-500 rounded transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="flex-1 bg-white relative">
+                <iframe id="doc-frame" class="w-full h-full border-none" src=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="chapter-modal" class="modal-wrapper fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeChapterModal()"></div>
+        <div class="relative w-full max-w-2xl bg-[#0f172a] border border-cyan-500/40 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden modal-content">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 border-b border-white/5 p-5 flex justify-between items-start">
+                <div>
+                    <h3 class="text-xl font-tech text-cyan-400 font-bold mb-1" id="chapter-modal-title">CHƯƠNG I</h3>
+                    <div class="text-xs text-gray-400 font-mono-tech uppercase tracking-wide" id="chapter-modal-desc">Quy định chung</div>
+                </div>
+                <button onclick="closeChapterModal()" class="text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[60vh] text-sm text-gray-300 leading-7 font-light" id="chapter-modal-content">
+                </div>
+            <div class="p-4 bg-slate-900/50 border-t border-white/5 text-right">
+                <button onclick="closeChapterModal()" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded text-xs text-white transition">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Init Particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00f3ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f3ff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "bubble" }, "resize": true },
+                "modes": { "bubble": { "distance": 200, "size": 4, "duration": 2, "opacity": 0.6 } }
+            },
+            "retina_detect": true
+        });
+
+        // --- DATA & CONFIG ---
+        let currentLang = 'vi';
+        const languages = ['vi', 'en', 'ba']; // Mảng 3 ngôn ngữ
+        
+        const translations = {
+            vi: {
+                'nav-overview': 'TỔNG QUAN', 'nav-structure': 'CẤU TRÚC', 'nav-compliance': 'TRA CỨU', 'nav-checkin': 'CAM KẾT', 'nav-minigame': 'GAME', 'btn-db': 'DỮ LIỆU NĐ25',
+                'hero-badge': 'CHÍNH PHỦ VIỆT NAM // SỐ 25/2014/NĐ-CP',
+                'hero-title': 'NGHỊ ĐỊNH 25/2014',
+                'hero-sub': 'QUY ĐỊNH VỀ PHÒNG, CHỐNG TỘI PHẠM VÀ VI PHẠM PHÁP LUẬT KHÁC CÓ SỬ DỤNG CÔNG NGHỆ CAO',
+                'btn-explore': 'KHÁM PHÁ NỘI DUNG', 'btn-infographic': 'XEM INFOGRAPHIC', 'video-label': 'LIVE FEED: HIGH_TECH_CRIME_PREVENTION.MP4',
+                'sect-overview-title': '01 // TỔNG QUAN', 'sect-structure-title': '02 // CẤU TRÚC NGHỊ ĐỊNH', 'sect-compliance-title': '03 // BIỆN PHÁP & TRÁCH NHIỆM', 'sect-checkin-title': '04 // CAM KẾT CÔNG DÂN SỐ', 'sect-game-title': '05 // THỬ THÁCH NGHỊ ĐỊNH',
+                'card-scope-title': 'Phạm Vi Điều Chỉnh', 'card-scope-text': 'Nghị định quy định về hoạt động phòng ngừa, phát hiện, xử lý tội phạm và vi phạm pháp luật khác có sử dụng công nghệ cao; hợp tác quốc tế và trách nhiệm các bên liên quan.',
+                'card-target-title': 'Đối Tượng Áp Dụng', 'card-target-list': `<li>Cơ quan chuyên trách.</li><li>Cơ quan, tổ chức, công dân VN.</li><li>Cá nhân, tổ chức nước ngoài tại VN.</li>`,
+                'card-principle-title': 'Nguyên Tắc Chính', 'card-principle-text': 'Lấy <strong>phòng ngừa là chính</strong>; chủ động, kịp thời phát hiện, ngăn chặn, xử lý nghiêm minh mọi vi phạm.',
+                'label-measures': 'BIỆN PHÁP PHÒNG NGỪA', 'label-responsibilities': 'TRÁCH NHIỆM CHỦ THỂ',
+                'checkin-instruct-title': 'Tạo Thẻ Cam Kết', 'checkin-instruct-text': 'Tải ảnh cá nhân để tạo thẻ xác nhận bạn đã tìm hiểu và cam kết tuân thủ Nghị định 25/2014/NĐ-CP.',
+                'btn-upload': 'TẢI ẢNH (JPG/PNG)', 'btn-download': 'LƯU THẺ VỀ MÁY',
+                'game-intro-title': 'KIỂM TRA KIẾN THỨC', 'game-intro-text': '5 câu hỏi trắc nghiệm nhanh về nội dung cốt lõi của Nghị định 25/2014/NĐ-CP.', 'btn-start-game': 'BẮT ĐẦU',
+                'hint-click': 'Click vào từng chương để xem chi tiết',
+                'footer-slogan': '"Lan tỏa tri thức - Kết nối tương lai"', 'footer-sub': 'Cổng thông tin tra cứu Nghị định 25/2014/NĐ-CP về phòng chống tội phạm công nghệ cao.',
+                'footer-topic-content': 'XÂY DỰNG BỘ ẤN PHẨM ĐA NGÔN NGỮ TUYÊN TRUYỀN, GIÁO DỤC PHÁP LUẬT VỀ AN NINH MẠNG VÀ PHÒNG CHỐNG TỘI PHẠM CÔNG NGHỆ CAO CHO THANH THIẾU NIÊN',
+                'footer-teacher-label': 'GVHD', 'footer-student-label': 'THỰC HIỆN',
+                'game-finish-title': 'HOÀN THÀNH',
+                'result-message': 'XUẤT SẮC!',
+                'btn-replay': 'Làm lại',
+                'btn-share': 'Chia sẻ kết quả'
+            },
+            en: {
+                'nav-overview': 'OVERVIEW', 'nav-structure': 'STRUCTURE', 'nav-compliance': 'LOOKUP', 'nav-checkin': 'COMMITMENT', 'nav-minigame': 'GAME', 'btn-db': 'DECREE 25 DATA',
+                'hero-badge': 'GOVERNMENT OF VIETNAM // No. 25/2014/ND-CP',
+                'hero-title': 'DECREE 25/2014',
+                'hero-sub': 'REGULATIONS ON PREVENTION AND COMBAT OF CRIMES AND OTHER LEGAL VIOLATIONS USING HIGH TECHNOLOGY',
+                'btn-explore': 'EXPLORE CONTENT', 'btn-infographic': 'VIEW INFOGRAPHIC', 'video-label': 'LIVE FEED: HIGH_TECH_CRIME_PREVENTION.MP4',
+                'sect-overview-title': '01 // OVERVIEW', 'sect-structure-title': '02 // DECREE STRUCTURE', 'sect-compliance-title': '03 // MEASURES & RESPONSIBILITIES', 'sect-checkin-title': '04 // DIGITAL CITIZEN PLEDGE', 'sect-game-title': '05 // DECREE CHALLENGE',
+                'card-scope-title': 'Scope of Regulation', 'card-scope-text': 'Regulations on prevention, detection, and handling of crimes using high technology; international cooperation and responsibilities of relevant parties.',
+                'card-target-title': 'Subjects of Application', 'card-target-list': `<li>Specialized agencies.</li><li>VN agencies, organizations, citizens.</li><li>Foreign individuals/orgs in VN.</li>`,
+                'card-principle-title': 'Key Principles', 'card-principle-text': 'Take <strong>prevention as the main focus</strong>; proactively detect, prevent, and strictly handle all violations.',
+                'label-measures': 'PREVENTION MEASURES', 'label-responsibilities': 'RESPONSIBILITIES',
+                'checkin-instruct-title': 'Create Pledge Card', 'checkin-instruct-text': 'Upload photo to create a card confirming you have learned and pledged to comply with Decree 25/2014/ND-CP.',
+                'btn-upload': 'UPLOAD PHOTO', 'btn-download': 'SAVE CARD',
+                'game-intro-title': 'KNOWLEDGE CHECK', 'game-intro-text': '5 quick questions about the core content of Decree 25/2014/ND-CP.', 'btn-start-game': 'START',
+                'hint-click': 'Click on each chapter for details',
+                'footer-slogan': '"Spreading knowledge - Connecting future"', 'footer-sub': 'Information portal for Decree 25/2014/ND-CP on high-tech crime prevention.',
+                'footer-topic-content': 'BUILDING MULTILINGUAL PUBLICATION FOR PROPAGANDA AND LEGAL EDUCATION ON CYBERSECURITY AND HIGH-TECH CRIME PREVENTION FOR YOUTH',
+                'footer-teacher-label': 'INSTRUCTOR', 'footer-student-label': 'STUDENTS',
+                'game-finish-title': 'COMPLETED',
+                'result-message': 'EXCELLENT!',
+                'btn-replay': 'Play Again',
+                'btn-share': 'Share Result'
+            },
+            ba: {
+                'nav-overview': 'HƠTŬM TƠDRONG KĂL', 'nav-structure': 'PƠM PƠJING', 'nav-compliance': 'CHĂ NĂNG PƠNHEN', 'nav-checkin': 'TƠCHƠ̆T', 'nav-minigame': 'GAME', 'btn-db': 'KHONG TƠMAM TƠM NĐ25',
+                'hero-badge': 'CHINH PHUH VIỆT NAM // KƠXÔ̆ 25/2014/NĐ-CP',
+                'hero-title': 'PƠKĂ 25/2014',
+                'hero-sub': 'PƠKĂ GAH JRĂ, DƠ̆T MU TRŎ YOCH PĂ NG PƠM YOCH PHAP LUÂT ANAI ĐEI IŎK YUƠ CÔNG NGHỆ KƠJUNG',
+                'btn-explore': 'CHĂ ‘BÔH TƠDRONG TƠM.', 'btn-infographic': 'NĂNG INFOGRAPHIC', 'video-label': 'LIVE FEED: HIGH_TECH_CRIME_PREVENTION.MP4',
+                'sect-overview-title': '01 // HƠTŬM TƠDRONG KĂL', 'sect-structure-title': '02 // PƠM PƠJING PƠKĂ', 'sect-compliance-title': '03 // CHĂ NĂNG PƠNHEN & SƠNONG JANG', 'sect-checkin-title': '04 // TƠCHƠ̆T MU RƠGEI GAH KƠMAĬ JÔ̆', 'sect-game-title': '05 // PƠLONG PƠKĂ',
+                'card-scope-title': 'Lơ̆m Tơdrong Ming Rơtăp', 'card-scope-text': 'Pơkă gah tơdrong pơm juer dơ̆t, lơlĕ ‘bôh, pơxrŭ ming bơngai yoch păng pơm yoch tơdrong luât anai đei iŏk yuơ công nghệ kơjung, sơnong jang po hơnih jang, tơ‘nhăk po bơngai.',
+                'card-target-title': 'Tơdrong tơchĕng truh wă pơm', 'card-target-list': `<li>Hơnih jang pôm wă năng wer, jră bơngai yoch.</li><li>Hơnih jang, tơ‘nhăk, kon bơngai Viêt Nam.</li><li>Po bơngai, tơ‘nhăk teh đak hơgah tơ VN.</li>`,
+                'card-principle-title': 'Tơdrong tơm hơtŭm', 'card-principle-text': 'I ŏ k <strong>juer dơ̆ t j ĭ tơm</strong>; pơm k ơ dih, hm ĕnh dah lơ lĕ ‘bô h, dơ̆ t pă ng pơ xr ŭ chơ tăng tơpăt tôm tơ drong pơm yoch.',
+                'label-measures': 'TƠDRONG JUER DƠ̆T', 'label-responsibilities': 'SƠNONG KƠDRĂ PƠGƠR',
+                'checkin-instruct-title': 'Pơjing Hlaar Ĭe Tơchơ̆t Pơm', 'checkin-instruct-text': 'Taih um po tơ‘ngla wă pơjing hlaar iĕ pơtĭl bôl sang chă wao păng tơchơ̆t pơm ‘moi pơkă 25/2014/NĐ-CP.',
+                'btn-upload': 'TAIH UM (JPG/PNG)', 'btn-download': '‘MĂN HLAAR IĔ WIH LƠ̆M KƠMAĬ',
+                'game-intro-title': 'CHĂ NĂNG TƠDRONG RƠGEI JUAIH', 'game-intro-text': '5 trong jet trŏ dah yoch hmĕnh gah tơtrong tơm cốt lõi gah pơkă 25/2014/NĐ-CP.', 'btn-start-game': 'PƠTƠM',
+                'hint-click': 'Clink mŭt lỡm chăl wă năng tôm tơdrong',
+                'footer-slogan': '"Lơlan jơ̆p jă hlôh wao – Tơguât ning mônh"', 'footer-sub': '‘Măng jang ră pơtơ̆ng tra cứu păng pơră jơ̆p jă pơkă 25/2014/NĐ-CP gah jră dơ̆t trŏ yoch công nghệ kơjung.',
+                'footer-topic-content': 'PƠJING BỘ HLABAR IN LƠ NÂR TOBANG PƠANG, BƠTHO NHĂK KHÔI LUÂT GAH SƠNÊP MẠNG PĂNG DÂT PƠJRĂ LU MÊ̆ CÔNG NGHỆ CAO ĂN KƠ ĐE HAIOH TƠDĂM.',
+                'footer-teacher-label': '[BA] GVHD', 'footer-student-label': '[BA] THỰC HIỆN',
+                'game-finish-title': 'JANG ĐANG',
+                'result-message': '‘LƠ̆NG RƠGEI!',
+                'btn-replay': 'Bơ̆ hơdrăp',
+                'btn-share': 'Hơxong pơma trŏ tơdrong'
+            }
+        };
+
+        const videos = { 
+            vi: 'https://drive.google.com/file/d/1b7pENVQ3sM-r8GSCMKW6LwuIX3VCWOq9/preview', 
+            en: 'https://drive.google.com/file/d/1Q5Pt48vn0he68RpFwxk49xru7qegHxoP/preview',
+            ba: 'https://drive.google.com/file/d/1qz5S5ZPoJXY1sb4231lzdghTJH1y6zwA/preview' /* Thay bằng link video Bahnar nếu có */
+        };
+        
+        const infographics = {
+            vi: 'https://drive.google.com/file/d/1q-dJHIXW6H_UgHavOc87-o8VdGdA57TZ/view?usp=sharing',
+            en: 'https://drive.google.com/file/d/1LOGxrG_X5T3Cbi9I6nVPyn4mdoZ7QDmZ/view?usp=sharing',
+            ba: 'https://drive.google.com/file/d/1q-dJHIXW6H_UgHavOc87-o8VdGdA57TZ/view?usp=sharing' /* Thay bằng link info Bahnar nếu có */
+        };
+        
+        // --- 1. CHAPTER CONTENT ---
+        const chapterContent = {
+            1: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 1:</strong> Phạm vi điều chỉnh (Phòng ngừa, phát hiện, xử lý, hợp tác quốc tế).</li><li><strong>Điều 2:</strong> Đối tượng áp dụng (Cơ quan chuyên trách, tổ chức, cá nhân VN & nước ngoài).</li><li><strong>Điều 3:</strong> Giải thích từ ngữ (Tội phạm CNC, Vi phạm pháp luật khác dùng CNC...).</li><li><strong>Điều 4:</strong> Nguyên tắc (Tuân thủ pháp luật, phòng ngừa là chính, bảo vệ quyền lợi hợp pháp).</li><li><strong>Điều 5:</strong> Chính sách Nhà nước (Đầu tư trang thiết bị, đào tạo nhân lực, đảm bảo kinh phí).</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 1:</strong> Scope (Prevention, detection, handling, int'l cooperation).</li><li><strong>Art 2:</strong> Subjects (Specialized agencies, VN/Foreign entities).</li><li><strong>Art 3:</strong> Terms (High-tech crimes, other violations...).</li><li><strong>Art 4:</strong> Principles (Law compliance, prevention focused, rights protection).</li><li><strong>Art 5:</strong> State Policy (Investment in equipment, training, funding).</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 1:</strong> Lơ̆m kơvăl ming rơtăp.</li><li><strong>Tơdrong 2:</strong> Bơngai tơchĕng wă pơm.</li><li><strong>Tơdrong 3:</strong> Pơđơ̆k nơ̆r.</li><li><strong>Tơdrong 4:</strong> Tơdrong tơm.</li><li><strong>Tơdrong 5:</strong> Tơdrong rơtăp tơm teh đak.</li></ul>",
+            },
+            2: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 6:</strong> Thông tin, tuyên truyền, giáo dục (Nội dung và hình thức tuyên truyền).</li><li><strong>Điều 7:</strong> Quản lý hành chính về an ninh, trật tự (Theo dõi nhân khẩu, quản lý xuất nhập cảnh...).</li><li><strong>Điều 8:</strong> Hoạt động phòng ngừa của Cơ quan chuyên trách (Thu thập thông tin, dự báo tình hình).</li><li><strong>Điều 9:</strong> Cá nhân tham gia phòng ngừa (Bảo vệ mật khẩu, tố giác tội phạm).</li><li><strong>Điều 10:</strong> Trách nhiệm cơ quan, doanh nghiệp (Lưu trữ dữ liệu, cung cấp thông tin khi có yêu cầu).</li><li><strong>Điều 11:</strong> Trách nhiệm cơ quan truyền thông.</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 6:</strong> Info & Education (Content and forms of propaganda).</li><li><strong>Art 7:</strong> Administrative management (Residence monitoring, immigration...).</li><li><strong>Art 8:</strong> Prevention by Specialized Agencies (Data collection, forecasting).</li><li><strong>Art 9:</strong> Individual participation (Protect passwords, report crimes).</li><li><strong>Art 10:</strong> Responsibility of orgs/enterprises (Data storage, provide info).</li><li><strong>Art 11:</strong> Mass media responsibility.</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 6:</strong> Pơră tôm bôl, pơră pơtơ̆ ng, bơtho akhan.</li><li><strong>Tơdrong 7:</strong> Pơgơ̆r pơm kiơ̆ luât rơtăp gah sơnêp sơnoi, trŏ ‘blep.</li><li><strong>Tơdrong 8:</strong> Bơ̆ jang juer dơ̆t po hơnih pôm jang sơnong ei.</li><li><strong>Tơdrong 9:</strong> Po bơngai mŭt pơm tơdrong juer dơ̆t.</li><li><strong>Tơdrong 10:</strong> Sơnong hơnih jang, tơ‘nhăk pơdro sa.</li><li><strong>Tơdrong 11:</strong> Sơnong hơnih jang pơră tơdah tơdong.</li></ul>",
+            },
+            3: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 12:</strong> Tố giác, tin báo về tội phạm.</li><li><strong>Điều 13:</strong> Phát hiện, xử lý qua thanh tra, kiểm tra.</li><li><strong>Điều 14:</strong> Biện pháp của Cơ quan chuyên trách.</li><li><strong>Điều 15:</strong> Xử lý vi phạm.</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 12:</strong> Reporting and informing about crimes.</li><li><strong>Art 13:</strong> Detection and handling through inspection and investigation.</li><li><strong>Art 14:</strong> Measures by specialized agencies.</li><li><strong>Art 15:</strong> Handling violations.</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 12:</strong> pơră tơdrong bĭ trŏ, pơ ră mu trŏ yoch.</li><li><strong>Tơdrong 13:</strong> Jrơ̆m ‘bôh, tơchĕng ming găn tơlang chă năng, năng pơtĭl.</li><li><strong>Tơdrong 14:</strong> Tơdrong pơm po hơnih pôm jang sơnong ei.</li><li><strong>Tơdrong 15:</strong> Tơdrong pơm po hơnih pôm jang sơnong ei.</li></ul>",
+            },
+            4: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 16:</strong> Nội dung hợp tác quốc tế (Ký kết điều ước, dẫn độ, tương trợ tư pháp, trao đổi thông tin).</li><li><strong>Điều 17:</strong> Từ chối hợp tác quốc tế (Nếu gây phương hại chủ quyền, an ninh quốc gia).</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 16:</strong> Int'l Cooperation Content (Treaties, extradition, legal assistance, info exchange).</li><li><strong>Art 17:</strong> Refusal of cooperation (If harming sovereignty, national security).</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 16:</strong> Tơdrong tơm pơyŭp teh đak noh nai.</li><li><strong>Tơdrong 17:</strong> Jră kuă pơy ŭp teh đak noh nai.</li></ul>",
+            },
+            5: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 18:</strong> Trách nhiệm Bộ Công an (Chủ trì, chỉ đạo cơ quan chuyên trách).</li><li><strong>Điều 19:</strong> Trách nhiệm Bộ Quốc phòng.</li><li><strong>Điều 20:</strong> Trách nhiệm Bộ TTTT (Chỉ đạo truyền thông, phối hợp xử lý).</li><li><strong>Điều 21-26:</strong> Trách nhiệm các Bộ khác (Công Thương, NHNN, VHTTDL, KHCN) và UBND các cấp.</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 18:</strong> Ministry of Public Security (Lead, direct specialized agencies).</li><li><strong>Art 19:</strong> Ministry of National Defense.</li><li><strong>Art 20:</strong> Ministry of Info & Comms.</li><li><strong>Art 21-26:</strong> Other Ministries (Industry & Trade, State Bank, Culture, Science) & People's Committees.</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 18:</strong> Sơnong jang hnam tơm wei sơnêp atŭm.</li><li><strong>Tơdrong 19:</strong> Sơnong jang hnam tơm wei sơnêp atŭm.</li><li><strong>Tơdrong 20:</strong> Sơnong jang hnam tơm TTTT.</li><li><strong>Tơdrong 21-26:</strong> Sơnong jang dôm hnam tơm anai păng UBND tôm tăl.</li></ul>",
+            },
+            6: {
+                vi: "<ul class='cyber-list'><li><strong>Điều 27:</strong> Hiệu lực thi hành (Từ 22/5/2014).</li><li><strong>Điều 28:</strong> Trách nhiệm thi hành.</li></ul>",
+                en: "<ul class='cyber-list'><li><strong>Art 27:</strong> Effect (From May 22, 2014).</li><li><strong>Art 28:</strong> Implementation responsibility.</li></ul>",
+                ba: "<ul class='cyber-list'><li><strong>Tơdrong 27:</strong> ing sĭt pơm kiơ̆.</li><li><strong>Tơdrong 28:</strong> Sơnong jang pơm kiơ̆.</li></ul>",
+            }
+        };
+
+        // --- 2. ACTS/COMPLIANCE DATA ---
+        const actsVi = {
+            measures: [
+                { t: "Điều 6", c: "Tuyên truyền, giáo dục kỹ năng phòng chống tội phạm mạng.", i: "fa-bullhorn" },
+                { t: "Điều 7", c: "Quản lý hành chính (hộ khẩu, xuất nhập cảnh) để phòng ngừa.", i: "fa-id-card" },
+                { t: "Điều 8", c: "Cơ quan chuyên trách thu thập thông tin, dự báo tình hình.", i: "fa-radar" },
+                { t: "Điều 14", c: "Yêu cầu cung cấp thông tin tài khoản, dữ liệu điện tử.", i: "fa-file-invoice" },
+                { t: "Điều 14", c: "Yêu cầu doanh nghiệp ngừng cung cấp dịch vụ Internet/Viễn thông.", i: "fa-ban" }
+            ],
+            responsibilities: [
+                { t: "Điều 9", c: "Cá nhân: Bảo vệ mật khẩu, thông tin cá nhân của mình.", i: "fa-key" },
+                { t: "Điều 9", c: "Cá nhân: Tố giác tội phạm với cơ quan Công an.", i: "fa-phone" },
+                { t: "Điều 10", c: "Doanh nghiệp: Lưu trữ dữ liệu điện tử theo quy định.", i: "fa-database" },
+                { t: "Điều 10", c: "Doanh nghiệp: Cung cấp dữ liệu cho cơ quan chuyên trách khi được yêu cầu.", i: "fa-hand-holding" },
+                { t: "Điều 18", c: "Bộ Công an: Chủ trì, hướng dẫn thi hành Nghị định.", i: "fa-user-police" }
+            ]
+        };
+        const actsEn = {
+            measures: [
+                { t: "Art 6", c: "Propaganda & education on cybercrime prevention skills.", i: "fa-bullhorn" },
+                { t: "Art 7", c: "Administrative management (residence, immigration).", i: "fa-id-card" },
+                { t: "Art 8", c: "Specialized agencies collect info & forecast.", i: "fa-radar" },
+                { t: "Art 14", c: "Request provision of account info, electronic data.", i: "fa-file-invoice" },
+                { t: "Art 14", c: "Request ISPs to suspend Internet/Telecom services.", i: "fa-ban" }
+            ],
+            responsibilities: [
+                { t: "Art 9", c: "Individuals: Protect own passwords & personal info.", i: "fa-key" },
+                { t: "Art 9", c: "Individuals: Report crimes to Police.", i: "fa-phone" },
+                { t: "Art 10", c: "Enterprises: Store electronic data as prescribed.", i: "fa-database" },
+                { t: "Art 10", c: "Enterprises: Provide data to agencies upon request.", i: "fa-hand-holding" },
+                { t: "Art 18", c: "Ministry of Public Security: Lead & guide implementation.", i: "fa-user-police" }
+            ]
+        };
+        const actsBa = {
+            measures: [
+                { t: "Tơdrong 6", c: "Ră pơ ang, bơtho ahkan  jră dơ̆t bơ ngai pơm yoch lơ̆m mạng.", i: "fa-bullhorn" },
+                { t: "Tơdrong 7", c: "Pơgơ̆r năng luât tơm teh đak (hlaar ŭnh hnam, mŭt lĕch hloh teh đak hơgah) wă juer dơ̆t.", i: "fa-id-card" },
+                { t: "Tơdrong 8", c: "hơnih hnam jang đei sơnong pơgơ̆r chă iŏk ră pơtơ̆ng, pơkă hơdroi tơdrong oei đei.", i: "fa-radar" },
+                { t: "Tơdrong 14", c: "Pơkăl pơră ăn tơdrong pơtơ̆ng chih kơxô̆ ‘măn jên, lơ khong tơmam điện tử.", i: "fa-file-invoice" },
+                { t: "Tơdrong 14", c: "Pơkăl  tơ‘nhăk  pơdro sa dơ̆ng pơtruh ăn tơ gŭm jang Internet/ Kơtơ̆ ng kơdăn hơtaih.", i: "fa-ban" }
+            ],
+            responsibilities: [
+                { t: "Tơdrong 9", c: "Po kơdih:Wei năng mật khẩu, ră pơtơ̆ng tơdrong po tơ‘ngla.", i: "fa-key" },
+                { t: "Tơdrong 9", c: "Po bơngai: Pơră mu trŏ yoch  kơ hơnih hnam jang bơngai wei sơnêp atŭm", i: "fa-phone" },
+                { t: "Tơdrong 10", c: "Hnam tơ‘nhăk pơdro sa:’Măn dữ liệu điện tử kiơ̆ pơkă.", i: "fa-database" },
+                { t: "Tơdrong 10", c: "Hnam tơ‘nhăk pơdro sa: Ăn dữ liệu kơ hơnih hnam jang đei sơnong pơgơ̆r ‘bơ̆t athei pơm.", i: "fa-hand-holding" },
+                { t: "Tơdrong 18", c: "Bộ bơngai wei sơnêp atŭm: tơm pơgơr, bơtho akhan pơm ‘moi pơkă.", i: "fa-user-police" }
+            ]
+        };
+
+        // --- 3. GAME DATA ---
+        const gameDataVi = [
+            { q: "Nghị định 25/2014/NĐ-CP có hiệu lực thi hành từ ngày nào?", a: ["22/05/2014", "01/01/2015", "07/04/2014", "25/12/2014"], c: 0 },
+            { q: "Nguyên tắc nào là chính trong phòng chống tội phạm công nghệ cao?", a: ["Trừng phạt là chính", "Lấy phòng ngừa là chính", "Thu phí là chính", "Cấm Internet"], c: 1 },
+            { q: "Theo Điều 9, cá nhân có trách nhiệm gì?", a: ["Tự tấn công lại hacker", "Bảo vệ mật khẩu & Tố giác tội phạm", "Không được sử dụng Internet", "Nộp tiền bảo kê"], c: 1 },
+            { q: "Cơ quan nào chủ trì giúp Chính phủ thực hiện Nghị định này?", a: ["Bộ Giáo dục", "Bộ Công an", "Bộ Y tế", "Bộ Xây dựng"], c: 1 },
+            { q: "Theo Điều 14, Cơ quan chuyên trách có quyền gì?", a: ["Tịch thu mọi tài sản", "Yêu cầu cung cấp dữ liệu điện tử liên quan", "Cắt Internet toàn quốc", "Đọc trộm tin nhắn tùy ý"], c: 1 }
+        ];
+        const gameDataEn = [
+            { q: "When did Decree 25/2014/ND-CP come into effect?", a: ["May 22, 2014", "Jan 1, 2015", "Apr 7, 2014", "Dec 25, 2014"], c: 0 },
+            { q: "What is the main principle in prevention?", a: ["Punishment focused", "Prevention is the main focus", "Fee collection", "Ban Internet"], c: 1 },
+            { q: "According to Art 9, what is individual responsibility?", a: ["Hack back", "Protect passwords & Report crimes", "Do not use Internet", "Pay protection fee"], c: 1 },
+            { q: "Which agency leads the implementation?", a: ["Ministry of Education", "Ministry of Public Security", "Ministry of Health", "Ministry of Construction"], c: 1 },
+            { q: "Under Art 14, Specialized Agencies can...?", a: ["Confiscate all assets", "Request relevant electronic data", "Cut national Internet", "Read msgs arbitrarily"], c: 1 }
+        ];
+        const gameDataBa = [
+            { q: "Pơkă 25/2014/NĐ-CP đei tơdrong sĭt thi hành dơ̆ng ‘năr mă yơ?", a: ["22/05/2014", "01/01/2015", "07/04/2014", "25/12/2014"], c: 0 },
+            { q: "Tơdrong tơm măyơ mă mônh lơ̆m tơdrong jră dơ̆t pơm yoch công nghệ kơjung?", a: ["Iŏk pơxrŭ jĭ mă mônh", "Iŏk jră dơ̆t jĭ mă mônh", "Iŏk drŭt kiơ̆ mạng jĭ mă mônh", "Iŏk ră pơang, bơtho akhan jĭ mă mônh"], c: 1 },
+            { q: "Kiơ̆ tơdrong 9, po tơ‘ngla đei sơnong kiơ?", a: ["Pơră mã OTP ăn bơngai nai lơlĕ", "Wei năng mật khẩu & pơră tơdrong ‘mĕ trŏ yoch", "Tŭk lĕ păng bĭ gơh pơră mu trŏ yoch", "Hơxong tơdrong pơră po tơ‘ngla lâm mạng"], c: 1 },
+            { q: "Hơnih hnam jang mă yơ pơm tơm  Chinh phuh pơm kiơ̆ pơkă âu?", a: ["Hnam tơm kơchăng wei năng teh đak", "Bộ bơngai wei sơnêp atŭm", "Hnam tơm TTTT", "Ủy ban nhân dân tôm tăl"], c: 1 },
+            { q: "Tơdrong 14, Hơnih hnam pơgơ̆r đei sơnong kiơ?", a: ["Kơdih paĭ tŭk lơ khong tơmam po tơ'ngla", "Athei ‘nhăk ăn lơ khong tơmam điện tử tơtrŏ", "Hơxong khong tơmam ăn teh đak hơgah", "Pơxrŭ jên dơ̆ng 50.000.000 hlak truh 200.000.000 hlak"], c: 1 }
+        ];
+
+        // --- FUNCTIONS ---
+        function toggleLanguage() { 
+            // Xoay vòng index: 0 -> 1 -> 2 -> 0
+            let currentIndex = languages.indexOf(currentLang);
+            currentLang = languages[(currentIndex + 1) % languages.length]; 
+            updateContent(); 
+        }
+        
+        function updateContent() {
+            const data = translations[currentLang];
+            // Update Text Elements
+            for (const key in data) { 
+                const el = document.getElementById(key); 
+                if (el) {
+                    if(key === 'card-target-list') el.innerHTML = data[key];
+                    else el.innerHTML = data[key]; 
+                }
+            }
+            
+            // Update Lang Indicator
+            document.getElementById('lang-code').innerText = currentLang.toUpperCase();
+            
+            const flagEl = document.getElementById('lang-flag');
+            if (currentLang === 'vi') {
+                flagEl.src = 'https://flagcdn.com/w40/vn.png';
+            } else if (currentLang === 'en') {
+                flagEl.src = 'https://flagcdn.com/w40/gb.png';
+            } else {
+                // Tiếng Bahnar - Dùng icon Globe làm placeholder cờ
+                flagEl.src = 'https://flagcdn.com/w40/vn.png';
+            }
+
+            // Gắn class font Bahnar
+            if (currentLang === 'ba') {
+                document.body.classList.add('lang-ba');
+            } else {
+                document.body.classList.remove('lang-ba');
+            }
+            
+            // Update Video
+            document.getElementById('main-video').src = videos[currentLang];
+
+            // Re-render components
+            renderStructure(); 
+            renderActs(); 
+            
+            // Cập nhật nhãn game nếu đang ở màn hình play
+            if(document.getElementById('game-play').classList.contains('hidden')) {
+                const qLbl = currentLang === 'vi' ? 'QUESTION' : (currentLang === 'en' ? 'QUESTION' : 'QUESTION');
+                const sLbl = currentLang === 'vi' ? 'SCORE' : (currentLang === 'en' ? 'SCORE' : 'SCORE');
+                document.getElementById('lbl-question').innerText = qLbl;
+                document.getElementById('lbl-score').innerText = sLbl;
+            }
+        }
+
+        function openInfoGraphic() {
+            const url = infographics[currentLang];
+            window.open(url, '_blank');
+        }
+
+        function renderStructure() {
+            const container = document.getElementById('structure-grid');
+            container.innerHTML = '';
+            
+            const chaptersVi = [
+                { t: "Chương I: Quy Định Chung", d: "Phạm vi, đối tượng, nguyên tắc & chính sách nhà nước.", id: 1 },
+                { t: "Chương II: Phòng Ngừa", d: "Tuyên truyền, quản lý hành chính & trách nhiệm các bên.", id: 2, hl: true },
+                { t: "Chương III: Phát Hiện & Xử Lý", d: "Tố giác, thanh tra, biện pháp nghiệp vụ của Công an.", id: 3, hl: true },
+                { t: "Chương IV: Hợp Tác Quốc Tế", d: "Dẫn độ, tương trợ tư pháp & trao đổi thông tin.", id: 4 },
+                { t: "Chương V: Trách Nhiệm Bộ Ngành", d: "Phân công trách nhiệm Bộ Công an, TTTT, Quốc phòng...", id: 5 },
+                { t: "Chương VI: Điều Khoản Thi Hành", d: "Hiệu lực & trách nhiệm thi hành.", id: 6 }
+            ];
+            const chaptersEn = [
+                { t: "Chapter I: General Provisions", d: "Scope, subjects, principles & state policies.", id: 1 },
+                { t: "Chapter II: Prevention", d: "Propaganda, admin management & responsibilities.", id: 2, hl: true },
+                { t: "Chapter III: Detection & Handling", d: "Reporting, inspection, police measures.", id: 3, hl: true },
+                { t: "Chapter IV: Int'l Cooperation", d: "Extradition, legal assistance & info exchange.", id: 4 },
+                { t: "Chapter V: Ministries' Roles", d: "Responsibilities of MPS, MIC, MND...", id: 5 },
+                { t: "Chapter VI: Implementation", d: "Effect & execution responsibilities.", id: 6 }
+            ];
+            const chaptersBa = [
+                { t: "Chăl I: Pơkă hơtŭm", d: "Lơ̆m kơvăl,tơdrong tơchĕng truh, tơdrong hơtŭm & tơdrong rơtăp tơm teh đak.", id: 1 },
+                { t: "Chăl II: Jră dơ̆t", d: "Ră pơtơ̆ng,  pơgơ̆r pơm kiơ̆ luât teh đak & sơ nong ‘bar pah.", id: 2, hl: true },
+                { t: "Chăl III: Jrơ̆m ‘bôh & tơchĕng ming", d: "pơră tơdrong bĭ trŏ, tơlang chă năng, tơdrong sơnong jang po wei sơnêp atŭm.", id: 3, hl: true },
+                { t: "Chăl IV: Pơyŭp teh đak noh nai", d: "‘Nhăk bơngai dêh agah trŏ rôp, tơgŭm wei năng luât & pơjao hơ‘blih pơ Tôm", id: 4 },
+                { t: "Chăl V: Sơnong jang bộ ngành", d: "Hơxong sơnong jang hnam tơm wei tơdrong sơnêp. TTTT,  Kơchăng wei năng teh đak.", id: 5 },
+                { t: "Chăl VI: Tôm tơdrong athei pơm kiơ̆", d: "Jing sĭt & sơnong jang  pơm kiơ̆.", id: 6 }
+            ];
+
+            const data = currentLang === 'vi' ? chaptersVi : (currentLang === 'en' ? chaptersEn : chaptersBa);
+            
+            data.forEach(item => {
+                const highlightClass = item.hl ? 'border-cyan-500/50 shadow-[0_0_15px_rgba(0,243,255,0.1)]' : 'border-white/5';
+                const iconColor = item.hl ? 'text-cyan-400' : 'text-gray-600';
+                
+                const html = `
+                <div class="glass-card structure-card p-5 rounded-xl border ${highlightClass} cursor-pointer group" onclick="openChapterModal(${item.id})">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="text-[10px] font-mono-tech text-gray-500 tracking-widest uppercase">SECTION 0${item.id}</div>
+                        <i class="fa-solid fa-angle-right ${iconColor} group-hover:translate-x-1 transition"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg mb-2 group-hover:text-cyan-300 transition">${item.t}</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">${item.d}</p>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        // --- COMPLIANCE TABS ---
+        let currentTab = 'measures';
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tab-measures').className = tab === 'measures' 
+                ? 'w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between transition border border-cyan-500/30 bg-cyan-900/20 text-white'
+                : 'w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between text-gray-500 transition border border-transparent hover:bg-white/5';
+            
+            document.getElementById('tab-responsibilities').className = tab === 'responsibilities'
+                ? 'w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between transition border border-purple-500/30 bg-purple-900/20 text-white'
+                : 'w-full text-left p-3 rounded-md text-xs font-bold flex items-center justify-between text-gray-500 transition border border-transparent hover:bg-white/5';
+            
+            renderActs();
+        }
+
+        function renderActs(filterText = '') {
+            const container = document.getElementById('list-content');
+            container.innerHTML = '';
+            
+            const source = currentLang === 'vi' ? actsVi : (currentLang === 'en' ? actsEn : actsBa);
+            const data = source[currentTab];
+            
+            document.getElementById('count-measures').innerText = source.measures.length;
+            document.getElementById('count-responsibilities').innerText = source.responsibilities.length;
+
+            data.forEach((item, index) => {
+                if (filterText && !item.c.toLowerCase().includes(filterText.toLowerCase())) return;
+                
+                const colorClass = currentTab === 'measures' ? 'text-cyan-400' : 'text-purple-400';
+                const bgIcon = currentTab === 'measures' ? 'bg-cyan-500/10' : 'bg-purple-500/10';
+                const borderLeft = currentTab === 'measures' ? 'border-l-2 border-cyan-500' : 'border-l-2 border-purple-500';
+
+                const el = document.createElement('div');
+                el.className = `glass-card p-4 rounded-lg ${borderLeft} flex gap-4 items-center hover:bg-white/5 transition animate-[fadeIn_0.3s_ease]`;
+                el.style.animationDelay = `${index * 0.05}s`;
+                
+                el.innerHTML = `
+                    <div class="w-10 h-10 rounded-full ${bgIcon} flex items-center justify-center shrink-0">
+                        <i class="fa-solid ${item.i} ${colorClass}"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] ${colorClass} font-bold font-mono-tech uppercase mb-1">${item.t}</div>
+                        <div class="text-xs text-gray-300 leading-snug">${item.c}</div>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+        function filterActs() { renderActs(document.getElementById('act-search').value); }
+
+        // --- GAME LOGIC ---
+        let gameState = { score: 0, currentQ: 0 };
+        function startGame() { 
+            gameState.score=0; gameState.currentQ=0; 
+            document.getElementById('game-start').classList.add('hidden'); 
+            document.getElementById('game-result').classList.add('hidden'); 
+            document.getElementById('game-play').classList.remove('hidden'); 
+            loadQuestion(); 
+        }
+        function loadQuestion() {
+            const dataSet = currentLang === 'vi' ? gameDataVi : (currentLang === 'en' ? gameDataEn : gameDataBa);
+            const qData = dataSet[gameState.currentQ];
+            
+            document.getElementById('q-current').innerText = gameState.currentQ + 1;
+            document.getElementById('current-score').innerText = gameState.score;
+            document.getElementById('question-text').innerText = qData.q;
+            
+            const c = document.getElementById('options-container'); c.innerHTML='';
+            qData.a.forEach((opt,i) => {
+                const btn = document.createElement('button'); 
+                btn.className="w-full bg-slate-800/80 p-4 rounded-lg hover:bg-cyan-900/40 border border-white/5 hover:border-cyan-500/50 text-left transition text-sm md:text-base text-gray-300 hover:text-white flex items-center gap-3 group";
+                btn.innerHTML = `<span class="w-6 h-6 rounded-full border border-gray-600 flex items-center justify-center text-[10px] group-hover:border-cyan-400 group-hover:text-cyan-400">${String.fromCharCode(65+i)}</span> ${opt}`;
+                btn.onclick=()=>checkAnswer(i,qData.c); 
+                c.appendChild(btn);
+            });
+        }
+        function checkAnswer(si, ci) {
+            if(si===ci) gameState.score+=20;
+            const btns = document.getElementById('options-container').children;
+            
+            btns[si].classList.remove('bg-slate-800/80');
+            btns[si].classList.add(si===ci?'bg-green-600/80':'bg-red-600/80', 'border-transparent');
+            
+            if(si!==ci) {
+                btns[ci].classList.remove('bg-slate-800/80');
+                btns[ci].classList.add('bg-green-600/80', 'border-transparent');
+            }
+
+            for(let b of btns) b.disabled=true;
+            
+            setTimeout(()=>{
+                gameState.currentQ++;
+                const dataSet = currentLang === 'vi' ? gameDataVi : (currentLang === 'en' ? gameDataEn : gameDataBa);
+                if(gameState.currentQ<dataSet.length) loadQuestion(); else endGame();
+            }, 1200);
+        }
+        function endGame() {
+            document.getElementById('game-play').classList.add('hidden'); 
+            document.getElementById('game-result').classList.remove('hidden');
+            document.getElementById('final-score').innerText = gameState.score;
+            
+            const h = localStorage.getItem('nd25_highscore')||0; 
+            if(gameState.score>h) { 
+                localStorage.setItem('nd25_highscore', gameState.score); 
+                document.getElementById('high-score-display').innerText=gameState.score+'/100'; 
+            }
+        }
+        function resetGame() { 
+            document.getElementById('game-result').classList.add('hidden'); 
+            document.getElementById('game-start').classList.remove('hidden'); 
+        }
+
+        // --- UTILS ---
+        function openDocViewer() { 
+            const url = "https://docs.google.com/document/d/1z-rx7XKMNJOXOiCPt3Mb25BFvCJnR9_U/preview";
+            document.getElementById('doc-frame').src = url;
+            document.getElementById('doc-viewer-modal').classList.add('active'); 
+        }
+        function closeDocViewer() { 
+            document.getElementById('doc-viewer-modal').classList.remove('active');
+            setTimeout(() => { document.getElementById('doc-frame').src = ""; }, 300);
+        }
+
+        // --- CHAPTER MODAL LOGIC ---
+        function openChapterModal(id) {
+            const content = chapterContent[id][currentLang];
+            
+            const roman = ["I", "II", "III", "IV", "V", "VI"];
+            const titlesVi = ["Quy Định Chung", "Phòng Ngừa", "Phát Hiện & Xử Lý", "Hợp Tác Quốc Tế", "Trách Nhiệm Bộ Ngành", "Điều Khoản Thi Hành"];
+            const titlesEn = ["General Provisions", "Prevention", "Detection & Handling", "Int'l Cooperation", "Ministries' Roles", "Implementation"];
+            const titlesBa = ["[BA] Quy Định Chung", "[BA] Phòng Ngừa", "[BA] Phát Hiện & Xử Lý", "[BA] Hợp Tác Quốc Tế", "[BA] Trách Nhiệm", "[BA] Điều Khoản"];
+            
+            const prefix = currentLang === 'vi' ? "CHƯƠNG" : (currentLang === 'en' ? "CHAPTER" : "[BA] CHƯƠNG");
+            const desc = currentLang === 'vi' ? titlesVi[id-1] : (currentLang === 'en' ? titlesEn[id-1] : titlesBa[id-1]);
+
+            document.getElementById('chapter-modal-title').innerText = `${prefix} ${roman[id-1]}`;
+            document.getElementById('chapter-modal-desc').innerText = desc;
+            document.getElementById('chapter-modal-content').innerHTML = content;
+            
+            document.getElementById('chapter-modal').classList.add('active');
+        }
+
+        function closeChapterModal() {
+            document.getElementById('chapter-modal').classList.remove('active');
+        }
+
+        function shareResult() {
+            let text = "";
+            if (currentLang === 'vi') {
+                text = `Tôi vừa đạt ${gameState.score}/100 điểm tìm hiểu Nghị định 25/2014/NĐ-CP tại PUSO Connect! Bạn có muốn thử sức? #CyberSecurity #ND25`;
+            } else if (currentLang === 'en') {
+                text = `I just scored ${gameState.score}/100 on Decree 25/2014/ND-CP knowledge check at PUSO Connect! #CyberSecurity #ND25`;
+            } else {
+                text = `[BA] Nội dung share: ${gameState.score}/100 điểm! #CyberSecurity #ND25`;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert(currentLang === 'vi' ? "Đã sao chép nội dung chia sẻ!" : (currentLang === 'en' ? "Content copied to clipboard!" : "[BA] Đã sao chép!"));
+            }).catch(err => {
+                console.error('Không thể sao chép', err);
+            });
+        }
+
+        // --- ID CARD (CHECK-IN) LOGIC ---
+        document.getElementById('upload-input').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('user-photo').src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        function downloadCheckin() {
+            const node = document.getElementById('checkin-area');
+            const btn = document.getElementById('btn-download');
+            const originalText = document.getElementById('btn-download').innerText;
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            html2canvas(node, {
+                useCORS: true,
+                scale: 2,
+                backgroundColor: null 
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'PUSO-Connect-Citizen-Card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                btn.innerHTML = `<i class="fa-solid fa-download"></i> <span id="btn-download">${originalText}</span>`;
+                btn.disabled = false;
+                
+                updateContent(); 
+
+            }).catch(err => {
+                console.error("Lỗi chụp màn hình:", err);
+                alert("Có lỗi xảy ra khi tạo ảnh. Vui lòng thử lại!");
+                btn.innerHTML = `<i class="fa-solid fa-download"></i> <span id="btn-download">${originalText}</span>`;
+                btn.disabled = false;
+                updateContent();
+            });
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('load', () => {
+            renderStructure();
+            renderActs();
+            
+            const highScore = localStorage.getItem('nd25_highscore') || 0;
+            document.getElementById('high-score-display').innerText = highScore + '/100';
+            
+            console.log("%c PUSO SYSTEM READY ", "background: #00f3ff; color: #000; font-weight: bold; padding: 4px;");
+        });
+
+    </script>
+</body>
+</html>
